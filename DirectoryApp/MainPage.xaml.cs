@@ -2,12 +2,13 @@
 {
     public partial class MainPage : ContentPage
     {
-        string setusername = "Allen Kalbo";
-        string setpassword = "PaHackSiAllen123";
+        string setusername = "admin";
+        string setpassword = "admin123";
 
         public MainPage()
         {
             InitializeComponent();
+            Shell.Current.Title = "Window Title";
         }
 
         private void OnLoginClick(object sender, EventArgs e)

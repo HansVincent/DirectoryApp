@@ -5,39 +5,60 @@
 
     <ScrollView>
         <VerticalStackLayout
-            Spacing="25"
+            
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Image
-                Source="kalbo.jpg"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="200"
-                HorizontalOptions="Center" />
+            <Label
+                x:Name="Username"
+                Text="Username"
+                Margin="0, 30, 0, 0"
+                WidthRequest="300"
+                SemanticProperties.HeadingLevel="Level5"
+                FontSize="13"
+                HorizontalOptions="Center"/>
 
             <Entry
                 x:Name="username"
-                Placeholder="USERNAME"
-                
+                Placeholder="Username"
+                WidthRequest="300"
                 TextChanged="OnEntryTextChanged"
-                Completed="OnLoginClick" />
+                Completed="OnLoginClick" 
+                HorizontalOptions="Center"/>
+
+            <Label
+                x:Name="Password"
+                Text="Password"
+                Margin="0, 30, 0, 0"
+                WidthRequest="300"
+                SemanticProperties.HeadingLevel="Level5"
+                FontSize="13"
+                FontFamily="Password-Bold"
+                HorizontalOptions="Center" />
 
             <Entry
                 x:Name="password"
                 IsPassword="True"
-                Placeholder="PASSWORD"
-                Completed="OnLoginClick" />
+                Placeholder="Password"
+                WidthRequest="300"
+                Completed="OnLoginClick" 
+                HorizontalOptions="Center"/>
 
             <Button
                 x:Name="CounterBtn"
-                Text="Click me"
-                SemanticProperties.Hint="Counts the number of times you click"
+                Text="Login"
+                SemanticProperties.Hint="Logs the user in when they click"
+                Margin="0, 30, 0, 0"
+                BackgroundColor="Blue"
+                WidthRequest="100"
                 Clicked="OnLoginClick"
                 HorizontalOptions="Center" />
             
+            
             <Label
                 x:Name="Status"
-                Text="Input Login Credentials"
+                Text=""
+                Margin="0, 30, 0, 0"
                 SemanticProperties.HeadingLevel="Level5"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
