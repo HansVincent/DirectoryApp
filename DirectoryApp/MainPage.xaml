@@ -22,8 +22,8 @@
                 x:Name="username"
                 Placeholder="Username"
                 WidthRequest="300"
-                TextChanged="OnEntryTextChanged"
-                Completed="OnLoginClick" 
+                TextChanged="onEntryTextChanged"
+                Completed="onLoginClick" 
                 HorizontalOptions="Center"/>
 
             <Label
@@ -41,8 +41,9 @@
                 IsPassword="True"
                 Placeholder="Password"
                 WidthRequest="300"
-                Completed="OnLoginClick" 
+                Completed="onLoginClick" 
                 HorizontalOptions="Center"/>
+
 
             <Button
                 x:Name="CounterBtn"
@@ -51,10 +52,18 @@
                 Margin="0, 30, 0, 0"
                 BackgroundColor="Blue"
                 WidthRequest="100"
-                Clicked="OnLoginClick"
+                Clicked="onLoginClick"
                 HorizontalOptions="Center" />
-            
-            
+
+            <Label Text="New User? Register Here"
+                HorizontalOptions="Center"
+                Margin="0, 30, 0, 0"
+                TextColor="Blue">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="onNavigateToRegisterTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+
             <Label
                 x:Name="Status"
                 Text=""

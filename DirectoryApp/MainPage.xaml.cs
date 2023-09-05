@@ -11,7 +11,7 @@
             Shell.Current.Title = "Window Title";
         }
 
-        private void OnLoginClick(object sender, EventArgs e)
+        private void onLoginClick(object sender, EventArgs e)
         {
             string enteredUsername = username.Text;
             string enteredPassword = password.Text;
@@ -60,11 +60,17 @@
             SemanticScreenReader.Announce(CounterBtn.Text);
         }
 
-        void OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        void onEntryTextChanged(object sender, TextChangedEventArgs e)
         {
             string oldText = e.OldTextValue;
             string newText = e.NewTextValue;
             string myText = username.Text;
+        }
+
+        private async void onNavigateToRegisterTapped(object sender, EventArgs e)
+        {
+  
+            await Navigation.PushAsync(new Register());
         }
 
 
