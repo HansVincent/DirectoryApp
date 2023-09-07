@@ -79,11 +79,18 @@
                 <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="15">
                     <Label Text="Gender"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
-                    <Border Stroke="Black">
-                        <Entry x:Name="userGender"
-                    WidthRequest="300"
-                    FontSize="15"/>
-                    </Border>
+
+                    <HorizontalStackLayout Spacing="20">
+                        <RadioButton
+                            x:Name="userGenderMale"
+                            VerticalOptions="Center"
+                            Content="Male">
+                        </RadioButton>
+                        <RadioButton
+                            x:Name="userGenderFemale"
+                            VerticalOptions="Center"
+                            Content="Female"/>
+                    </HorizontalStackLayout>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="15">
