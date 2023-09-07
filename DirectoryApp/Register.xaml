@@ -20,34 +20,24 @@
                     <Label Text="Student ID"
                                FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentID"
+                        <Entry x:Name="userStudentID"
                                    WidthRequest="300"
                                    FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="First Name"
                                FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userFirstName"
                                    WidthRequest="300"
                                    FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Spacing="15">
-                    <Label Text="Student ID"
-                FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
-                    <Border Stroke="Black">
-                        <Entry x:Name="FirstName"
-                    WidthRequest="300"
-                    FontSize="15"/>
-                    </Border>
-                </HorizontalStackLayout>
-
-                <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="userLast Name"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
                         <Entry x:Name="LastName"
@@ -56,81 +46,91 @@
                     </Border>
                 </HorizontalStackLayout>
 
-                <HorizontalStackLayout Grid.Row="4" Grid.Column="0" Spacing="15">
-                    <Label Text="Student ID"
+                <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Spacing="15">
+                    <Label Text="userEmail"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="Email"
+                    WidthRequest="300"
+                    FontSize="15"/>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="4" Grid.Column="0" Spacing="15">
+                    <Label Text="Password"
+                FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+                    <Border Stroke="Black">
+                        <Entry x:Name="userPassword"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="5" Grid.Column="0" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="Confirm Password"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userConfirmPassword"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="Gender"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userGender"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="Birth Date"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userBirthDate"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="Mobile No."
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userMobileNumber"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="3" Grid.Column="1" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="City"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userCity"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="4" Grid.Column="1" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="School Program"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userSchoolProgram"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="5" Grid.Column="1" Spacing="15">
-                    <Label Text="Student ID"
+                    <Label Text="Course"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userCourse"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
@@ -140,7 +140,7 @@
                     <Label Text="Year Level"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="StudentNumber"
+                        <Entry x:Name="userYearLevel"
                     WidthRequest="300"
                     FontSize="15"/>
                     </Border>
