@@ -56,14 +56,6 @@
                                     ValidStyle="{StaticResource validStudentEntryOutput}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Border.Triggers>
-                            <DataTrigger
-                                Binding="{Binding Source={x:Reference validateBehaviorUserStudentID}, Path=IsValid}"
-                                TargetType="Border"
-                                Value="False">
-                                    <Setter Property="Stroke" Value="red"/> 
-                            </DataTrigger>
-                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -86,14 +78,6 @@
                                      ValidStyle="{StaticResource validStudentEntryOutput}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Border.Triggers>
-                            <DataTrigger
-                                Binding="{Binding Source={x:Reference validateBehaviorStudentFirstName}, Path=IsValid}"
-                                TargetType="Border"
-                                Value="False"> 
-                                    <Setter Property="Stroke" Value="red"/> 
-                            </DataTrigger>
-                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -106,24 +90,16 @@
                                FontSize="15"
                                toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentEmail}"
                                Placeholder=""
-                               ToolTipProperties.Text="Required."> 
+                               ToolTipProperties.Text="Required.">
                             <Entry.Behaviors>
                                 <toolkit:TextValidationBehavior
                                      x:Name="validateBehaviorStudentLastName"
                                      MinimumLength="1"
                                      Flags="ValidateOnValueChanged , ValidateOnUnfocusing"
                                      InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
-                                     ValidStyle="{StaticResource validStudentEntryOutput}"/> 
+                                     ValidStyle="{StaticResource validStudentEntryOutput}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Border.Triggers>
-                            <DataTrigger
-                                Binding="{Binding Source={x:Reference validateBehaviorStudentLastName}, Path=IsValid}"
-                                TargetType="Border"
-                                Value="False"> 
-                                <Setter Property="Stroke" Value="red"/>
-                            </DataTrigger>
-                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -136,24 +112,16 @@
                                FontSize="15"
                                toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentPassword}"
                                Placeholder=""
-                               ToolTipProperties.Text="Required."> 
+                               ToolTipProperties.Text="Required.">
                             <Entry.Behaviors>
                                 <toolkit:EmailValidationBehavior
                                      x:Name="validateBehaviorStudentEmail"
                                      MinimumLength="10"
                                      Flags="ValidateOnValueChanged , ValidateOnUnfocusing"
                                      InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
-                                     ValidStyle="{StaticResource validStudentEntryOutput}"/> 
+                                     ValidStyle="{StaticResource validStudentEntryOutput}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Border.Triggers>
-                            <DataTrigger
-                                Binding="{Binding Source={x:Reference validateBehaviorStudentEmail}, Path=IsValid}"
-                                TargetType="Border"
-                                Value="False"> 
-                                <Setter Property="Stroke" Value="red"/>
-                            </DataTrigger>
-                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -168,26 +136,18 @@
                                toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentConfirmPassword}"
                                Placeholder="*****"
                                ClearButtonVisibility="WhileEditing"
-                               ToolTipProperties.Text="Required. Minimum of 8 characters."> 
+                               ToolTipProperties.Text="Required. Minimum of 8 characters.">
                             <Entry.Behaviors>
                                 <toolkit:CharactersValidationBehavior
                                  x:Name="validateBehaviorStudentPassword"
                                  MinimumLength="8"
                                  CharacterType="Alphanumeric"
                                  DecorationFlags="NullToEmpty"
-                                 Flags="ValidateOnValueChanged"
+                                 Flags="ValidateOnValueChanged,ValidateOnUnfocusing"
                                  InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
-                                 ValidStyle="{StaticResource validStudentEntryOutput}"/> 
+                                 ValidStyle="{StaticResource validStudentEntryOutput}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Border.Triggers>
-                            <DataTrigger
-                                Binding="{Binding Source={x:Reference validateBehaviorStudentPassword}, Path=IsValid}"
-                                TargetType="Border"
-                                Value="False"> 
-                                <Setter Property="Stroke" Value="red"/>
-                            </DataTrigger>
-                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -212,19 +172,11 @@
                                  ValidStyle="{StaticResource validStudentEntryOutput}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Border.Triggers>
-                            <DataTrigger
-                                Binding="{Binding Source={x:Reference validateBehaviorStudentConfirmPassword}, Path=IsValid}"
-                                TargetType="Border"
-                                Value="False"> 
-                                <Setter Property="Stroke" Value="red"/>
-                            </DataTrigger>
-                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="7" Grid.Column="0" Spacing="15" HorizontalOptions="End">
-                    <Button Text="Submit" WidthRequest="150" BackgroundColor="Blue" BorderColor="Black" CornerRadius="10" FontAttributes="Bold" FontSize="15" Margin="0,30,0,0">
+                    <Button Text="Submit" Clicked="SubmitButtonClicked" WidthRequest="150" BackgroundColor="Blue" BorderColor="Black" CornerRadius="10" FontAttributes="Bold" FontSize="15" Margin="0,30,0,0">
 
                         </Button>
                 </HorizontalStackLayout>
@@ -256,14 +208,6 @@
                             MaximumDate="{Binding MaxDate}"
                             MinimumDate="{Binding MininumDate}"
                             WidthRequest="300"/> 
-                        <Border.Triggers>
-                            <DataTrigger 
-                                     TargetType="Border"
-                                     Binding="{Binding Source={x:Reference studentBirthDate}, Path=Date}"
-                                     Value="{x:Static sys:DateTime.Today}">
-                                <Setter Property="Stroke" Value="Red" />
-                            </DataTrigger>
-                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -277,7 +221,7 @@
                                toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentCity}"
                                Keyboard="Numeric"
                                Placeholder=""
-                               ToolTipProperties.Text="Number input only"> 
+                               ToolTipProperties.Text="Number input only">
                             <Entry.Behaviors>
                                 <toolkit:CharactersValidationBehavior
                                 x:Name="validateBehaviorStudentMobileNumber"
@@ -286,17 +230,9 @@
                                 Flags="ValidateOnValueChanged"
                                 MinimumCharacterTypeCount="11"
                                 InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
-                                ValidStyle="{StaticResource validStudentEntryOutput}"/> 
+                                ValidStyle="{StaticResource validStudentEntryOutput}"/>
                             </Entry.Behaviors>
                         </Entry>
-                        <Border.Triggers>
-                            <DataTrigger
-                                Binding="{Binding Source={x:Reference validateBehaviorStudentMobileNumber}, Path=IsValid}"
-                                TargetType="Border"
-                                Value="False"> 
-                                <Setter Property="Stroke" Value="red"/>
-                            </DataTrigger>
-                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -326,17 +262,18 @@
                 <HorizontalStackLayout Grid.Row="5" Grid.Column="1" Spacing="15">
                     <Label Text="Course"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
-                    <Border Stroke="Black">
+                    <Border x:Name="borderStudentCourse" Stroke="Black">
                         <Picker x:Name="pickerStudentCourse"
                                 ItemsSource="{Binding StudentSchoolCourse}"
-                                WidthRequest="300"/> 
+                                WidthRequest="300"
+                                SelectedIndexChanged="pickerSchoolCourse_SelectedindexChanged"/> 
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="6" Grid.Column="1" Spacing="15">
                     <Label Text="Year Level"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
-                    <Border Stroke="Black">
+                    <Border x:Name="borderStudentYearLevel" Stroke="Black">
                         <Picker x:Name="pickerStudentYearLevel"
                                 ItemsSource="{Binding StudentYearLevel}"
                                 WidthRequest="300"/>
@@ -344,7 +281,7 @@
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="8" Grid.Column="1" Spacing="15" HorizontalOptions="Start">
-                    <Button Text="Reset" WidthRequest="150" BackgroundColor="Gray" BorderColor="Black" CornerRadius="10" FontAttributes="Bold" FontSize="15" Margin="0,30,0,0">
+                    <Button Text="Reset" Clicked="ResetButtonClicked" WidthRequest="150" BackgroundColor="Gray" BorderColor="Black" CornerRadius="10" FontAttributes="Bold" FontSize="15" Margin="0,30,0,0">
 
                     </Button>
                 </HorizontalStackLayout>
