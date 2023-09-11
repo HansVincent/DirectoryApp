@@ -1,4 +1,5 @@
-﻿namespace DirectoryApp
+﻿
+namespace DirectoryApp
 {
     public partial class MainPage : ContentPage
     {

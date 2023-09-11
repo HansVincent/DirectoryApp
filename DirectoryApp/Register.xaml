@@ -2,8 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="DirectoryApp.Register"
-             Title="Register">
+             Title="Register"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <ContentPage.Resources>
+        <Style 
+            x:Key="validStudentEntryOutput" 
+            TargetType="Entry">
+            <Setter 
+                Property="TextColor" 
+                Value="black"/>
+        </Style>
 
+        <Style 
+            x:Key="invalidStudentEntryOutput" 
+            TargetType="Entry">
+            <Setter 
+                Property="TextColor" 
+                Value="red"/>
+        </Style>
+    </ContentPage.Resources>
 
     <ScrollView>
         <VerticalStackLayout HeightRequest="500">
@@ -13,16 +31,39 @@
                           ColumnDefinitions="*,*"
                           HorizontalOptions="Center"
                           VerticalOptions="Center"
-                          RowDefinitions="*,*,*,*,*,*,*"
+                          RowDefinitions="*,*,*,*,*,*,*,*"
                           ColumnSpacing="15"
                           RowSpacing="15">
                 <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="15">
                     <Label Text="Student ID"
                                FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="userStudentID"
+                        <Entry x:Name="txtUserStudentIdentification"
                                    WidthRequest="300"
-                                   FontSize="15"/>
+                                   FontSize="15"
+                                   toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentFirstName}"
+                                   Keyboard="Numeric"
+                                   MaxLength="5"
+                                   Placeholder=""
+                                   ToolTipProperties.Text="Required. Numeric values only">
+                            <Entry.Behaviors>
+                                <toolkit:CharactersValidationBehavior
+                                    x:Name="validateBehaviorUserStudentID"
+                                    CharacterType="Digit"
+                                    Flags="ValidateOnValueChanged , ValidateOnUnfocusing"
+                                    InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
+                                    MinimumCharacterTypeCount="5"
+                                    ValidStyle="{StaticResource validStudentEntryOutput}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Border.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference validateBehaviorUserStudentID}, Path=IsValid}"
+                                TargetType="Border"
+                                Value="False">
+                                    <Setter Property="Stroke" Value="red"/> 
+                            </DataTrigger>
+                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -30,29 +71,89 @@
                     <Label Text="First Name"
                                FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="userFirstName"
+                        <Entry x:Name="txtStudentFirstName"
                                    WidthRequest="300"
-                                   FontSize="15"/>
+                                   FontSize="15"
+                                   toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentLastName}"
+                                   Placeholder=""
+                                   ToolTipProperties.Text="Required.">
+                            <Entry.Behaviors>
+                                <toolkit:TextValidationBehavior
+                                     x:Name="validateBehaviorStudentFirstName"
+                                     MinimumLength="1"
+                                     Flags="ValidateOnValueChanged , ValidateOnUnfocusing"
+                                     InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
+                                     ValidStyle="{StaticResource validStudentEntryOutput}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Border.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference validateBehaviorStudentFirstName}, Path=IsValid}"
+                                TargetType="Border"
+                                Value="False"> 
+                                    <Setter Property="Stroke" Value="red"/> 
+                            </DataTrigger>
+                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Spacing="15">
-                    <Label Text="userLast Name"
+                    <Label Text="Last Name"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="LastName"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                        <Entry x:Name="txtStudentLastName"
+                               WidthRequest="300"
+                               FontSize="15"
+                               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentEmail}"
+                               Placeholder=""
+                               ToolTipProperties.Text="Required."> 
+                            <Entry.Behaviors>
+                                <toolkit:TextValidationBehavior
+                                     x:Name="validateBehaviorStudentLastName"
+                                     MinimumLength="1"
+                                     Flags="ValidateOnValueChanged , ValidateOnUnfocusing"
+                                     InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
+                                     ValidStyle="{StaticResource validStudentEntryOutput}"/> 
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Border.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference validateBehaviorStudentLastName}, Path=IsValid}"
+                                TargetType="Border"
+                                Value="False"> 
+                                <Setter Property="Stroke" Value="red"/>
+                            </DataTrigger>
+                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Spacing="15">
-                    <Label Text="userEmail"
+                    <Label Text="Email"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="Email"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                        <Entry x:Name="txtStudentEmail"
+                               WidthRequest="300"
+                               FontSize="15"
+                               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentPassword}"
+                               Placeholder=""
+                               ToolTipProperties.Text="Required."> 
+                            <Entry.Behaviors>
+                                <toolkit:EmailValidationBehavior
+                                     x:Name="validateBehaviorStudentEmail"
+                                     MinimumLength="10"
+                                     Flags="ValidateOnValueChanged , ValidateOnUnfocusing"
+                                     InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
+                                     ValidStyle="{StaticResource validStudentEntryOutput}"/> 
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Border.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference validateBehaviorStudentEmail}, Path=IsValid}"
+                                TargetType="Border"
+                                Value="False"> 
+                                <Setter Property="Stroke" Value="red"/>
+                            </DataTrigger>
+                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -60,9 +161,33 @@
                     <Label Text="Password"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="userPassword"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                        <Entry x:Name="txtStudentPassword"
+                               IsPassword="True"
+                               WidthRequest="300"
+                               FontSize="10"
+                               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentConfirmPassword}"
+                               Placeholder="*****"
+                               ClearButtonVisibility="WhileEditing"
+                               ToolTipProperties.Text="Required. Minimum of 8 characters."> 
+                            <Entry.Behaviors>
+                                <toolkit:CharactersValidationBehavior
+                                 x:Name="validateBehaviorStudentPassword"
+                                 MinimumLength="8"
+                                 CharacterType="Alphanumeric"
+                                 DecorationFlags="NullToEmpty"
+                                 Flags="ValidateOnValueChanged"
+                                 InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
+                                 ValidStyle="{StaticResource validStudentEntryOutput}"/> 
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Border.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference validateBehaviorStudentPassword}, Path=IsValid}"
+                                TargetType="Border"
+                                Value="False"> 
+                                <Setter Property="Stroke" Value="red"/>
+                            </DataTrigger>
+                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -70,10 +195,38 @@
                     <Label Text="Confirm Password"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="userConfirmPassword"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                        <Entry x:Name="txtStudentConfirmPassword"
+                               IsPassword="True"
+                               WidthRequest="300"
+                               FontSize="10"
+                               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentMobileNumber}"
+                               Placeholder="*****"
+                               ClearButtonVisibility="WhileEditing"
+                               ToolTipProperties.Text="Required. Minimum of 8 characters.">
+                            <Entry.Behaviors>
+                                <toolkit:RequiredStringValidationBehavior
+                                 x:Name="validateBehaviorStudentConfirmPassword"
+                                 RequiredString="{Binding Source={x:Reference txtStudentPassword}, Path=Text}"
+                                 Flags="ValidateOnValueChanged"
+                                 InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
+                                 ValidStyle="{StaticResource validStudentEntryOutput}"/>
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Border.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference validateBehaviorStudentConfirmPassword}, Path=IsValid}"
+                                TargetType="Border"
+                                Value="False"> 
+                                <Setter Property="Stroke" Value="red"/>
+                            </DataTrigger>
+                        </Border.Triggers>
                     </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="7" Grid.Column="0" Spacing="15" HorizontalOptions="End">
+                    <Button Text="Submit" WidthRequest="150" BackgroundColor="Blue" BorderColor="Black" CornerRadius="10" FontAttributes="Bold" FontSize="15" Margin="0,30,0,0">
+
+                        </Button>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="0" Grid.Column="1" Spacing="15">
@@ -82,12 +235,12 @@
 
                     <HorizontalStackLayout Spacing="20">
                         <RadioButton
-                            x:Name="userGenderMale"
+                            x:Name="rdoStudentGenderMale"
                             VerticalOptions="Center"
                             Content="Male">
                         </RadioButton>
                         <RadioButton
-                            x:Name="userGenderFemale"
+                            x:Name="rdoStudentGenderFemale"
                             VerticalOptions="Center"
                             Content="Female"/>
                     </HorizontalStackLayout>
@@ -96,10 +249,21 @@
                 <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="15">
                     <Label Text="Birth Date"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
-                    <Border Stroke="Black">
-                        <Entry x:Name="userBirthDate"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                    <Border x:Name="borderBirthDatePicker" Stroke="Black">
+                        <DatePicker
+                            x:Name="studentBirthDate"
+                            DateSelected="OnDateSelected"
+                            MaximumDate="{Binding MaxDate}"
+                            MinimumDate="{Binding MininumDate}"
+                            WidthRequest="300"/> 
+                        <Border.Triggers>
+                            <DataTrigger 
+                                     TargetType="Border"
+                                     Binding="{Binding Source={x:Reference studentBirthDate}, Path=Date}"
+                                     Value="{x:Static sys:DateTime.Today}">
+                                <Setter Property="Stroke" Value="Red" />
+                            </DataTrigger>
+                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -107,9 +271,32 @@
                     <Label Text="Mobile No."
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="userMobileNumber"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                        <Entry x:Name="txtStudentMobileNumber"
+                               WidthRequest="300"
+                               FontSize="15"
+                               toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference txtStudentCity}"
+                               Keyboard="Numeric"
+                               Placeholder=""
+                               ToolTipProperties.Text="Number input only"> 
+                            <Entry.Behaviors>
+                                <toolkit:CharactersValidationBehavior
+                                x:Name="validateBehaviorStudentMobileNumber"
+                                CharacterType="Digit"
+                                MinimumLength="1"
+                                Flags="ValidateOnValueChanged"
+                                MinimumCharacterTypeCount="11"
+                                InvalidStyle ="{StaticResource invalidStudentEntryOutput}"
+                                ValidStyle="{StaticResource validStudentEntryOutput}"/> 
+                            </Entry.Behaviors>
+                        </Entry>
+                        <Border.Triggers>
+                            <DataTrigger
+                                Binding="{Binding Source={x:Reference validateBehaviorStudentMobileNumber}, Path=IsValid}"
+                                TargetType="Border"
+                                Value="False"> 
+                                <Setter Property="Stroke" Value="red"/>
+                            </DataTrigger>
+                        </Border.Triggers>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -117,19 +304,22 @@
                     <Label Text="City"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="userCity"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                        <Entry 
+                            x:Name="txtStudentCity"
+                            toolkit:SetFocusOnEntryCompletedBehavior.NextElement="{x:Reference pickerSchoolProgram}"
+                            Placeholder="Optional*"
+                            WidthRequest="300"/> 
                     </Border>
                 </HorizontalStackLayout>
 
                 <HorizontalStackLayout Grid.Row="4" Grid.Column="1" Spacing="15">
                     <Label Text="School Program"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
-                    <Border Stroke="Black">
-                        <Entry x:Name="userSchoolProgram"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                    <Border x:Name="borderStudentSchoolProgram" Stroke="Black">
+                        <Picker  x:Name="pickerStudentSchoolProgram"
+                                 ItemsSource="{Binding StudentSchoolProgram}"
+                                 WidthRequest="300"
+                                 SelectedIndexChanged="pickerSchoolProgram_SelectedIndexChanged"/>
                     </Border>
                 </HorizontalStackLayout>
 
@@ -137,9 +327,9 @@
                     <Label Text="Course"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="userCourse"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                        <Picker x:Name="pickerStudentCourse"
+                                ItemsSource="{Binding StudentSchoolCourse}"
+                                WidthRequest="300"/> 
                     </Border>
                 </HorizontalStackLayout>
 
@@ -147,10 +337,16 @@
                     <Label Text="Year Level"
                 FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
                     <Border Stroke="Black">
-                        <Entry x:Name="userYearLevel"
-                    WidthRequest="300"
-                    FontSize="15"/>
+                        <Picker x:Name="pickerStudentYearLevel"
+                                ItemsSource="{Binding StudentYearLevel}"
+                                WidthRequest="300"/>
                     </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="8" Grid.Column="1" Spacing="15" HorizontalOptions="Start">
+                    <Button Text="Reset" WidthRequest="150" BackgroundColor="Gray" BorderColor="Black" CornerRadius="10" FontAttributes="Bold" FontSize="15" Margin="0,30,0,0">
+
+                    </Button>
                 </HorizontalStackLayout>
 
             </Grid>
