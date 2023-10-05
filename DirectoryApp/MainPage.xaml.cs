@@ -1,23 +1,32 @@
 ﻿
+using System.IO.Enumeration;
+
 namespace DirectoryApp
 {
     public partial class MainPage : ContentPage
     {
         string setusername = "admin";
         string setpassword = "admin123";
-
+        string dirPath = "C:\\Users\\cpe3b2a06\\Desktop\\Metroboomin make it boom";
+        string fileName = "metroboomin.txt";
+        string filePath = String.Empty;
         public MainPage()
         {
+            filePath = Path.Combine(dirPath, fileName);
+            if(!File.Exists(filePath)) 
+            {
+                File.Create(filePath);
+            }
             InitializeComponent();
             Shell.Current.Title = "Window Title";
         }
 
         private void onLoginClick(object sender, EventArgs e)
         {
-            string enteredUsername = username.Text;
+            string enteredStudentID = studentID.Text;
             string enteredPassword = password.Text;
 
-            if (enteredUsername == setusername)
+            if (enteredStudentID == setusername)
             {
                 if(enteredPassword == setpassword && !string.IsNullOrWhiteSpace(enteredPassword))
                 {
@@ -32,22 +41,22 @@ namespace DirectoryApp
                     Status.Text = "Username and/or Password should not be empty. Please try again.";
                 }
             }
-            else if(enteredUsername != setusername)
+            else if(enteredStudentID != setusername)
             {
                 if (enteredPassword != setpassword && !string.IsNullOrWhiteSpace(enteredPassword))
                 {
-                    Status.Text = "Username and/or Password is incorrect. Please try again";
+                    Status.Text = "User does not exist. Please Register.";
                 }
                 else if (enteredPassword == setpassword && !string.IsNullOrWhiteSpace(enteredPassword))
                 {
-                    Status.Text = "Username and/or Password is incorrect. Please try again";
+                    Status.Text = "User does not exist. Please Register.";
                 }
                 else if(string.IsNullOrWhiteSpace(enteredPassword))
                 {
                     Status.Text = "Username and/or Password should not be empty. Please try again.";
                 }
             }
-            else if(enteredUsername == String.Empty)
+            else if(enteredStudentID == String.Empty)
             {
                 if(enteredPassword == String.Empty)
                 {
@@ -65,7 +74,7 @@ namespace DirectoryApp
         {
             string oldText = e.OldTextValue;
             string newText = e.NewTextValue;
-            string myText = username.Text;
+            string myText = studentID.Text;
         }
 
         private async void onNavigateToRegisterTapped(object sender, EventArgs e)

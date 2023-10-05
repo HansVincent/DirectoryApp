@@ -9,6 +9,9 @@ namespace DirectoryApp;
 public partial class Register : ContentPage,INotifyPropertyChanged
 {
     StudentViewModel thisStudent = new StudentViewModel();
+    string dirPath = "C:\\Users\\cpe3b2a06\\Desktop\\Metroboomin make it boom";
+    string fileName = "metroboomin.txt";
+    string fileIDPath = String.Empty;
     public DateTime MaxDate { get; set; } = DateTime.Today;
     public DateTime MinimumDate { get; set; } = DateTime.Today.AddYears(-100);
     private ObservableCollection<string> _studentSchoolProgram;
@@ -187,6 +190,7 @@ public partial class Register : ContentPage,INotifyPropertyChanged
         pickerStudentCourse.SelectedIndex = 0;
         pickerStudentYearLevel.SelectedIndex = 0;
         studentBirthDate.Date = DateTime.Today;
+        fileIDPath = String.Empty;
     }
 
     private void ResetButtonClicked(object sender, EventArgs e)
@@ -196,6 +200,8 @@ public partial class Register : ContentPage,INotifyPropertyChanged
 
     private async void SubmitButtonClicked(object sender, EventArgs e)
     {
+        fileName = "S" + txtUserStudentIdentification.Text;
+        Path.Combine(fileIDPath, fileName);
         int valid = ValidateForm();
         if(valid == 1)
         {
@@ -205,8 +211,12 @@ public partial class Register : ContentPage,INotifyPropertyChanged
         else if(valid == 0)
         {
             RegisterStudent();
-            string data = $"Student ID: {thisStudent.UserStudentID.ToString()}\n" + $"Full Name: {thisStudent.StudentLastName} {thisStudent.StudentFirstName}\n" + $"Email: {thisStudent.StudentEmail}\n" + $"Mobile No: {thisStudent.StudentMobileNumber}\n" + $"City: {thisStudent.StudentCity}\n" + $"Gender: {thisStudent.StudentGender}\n" + $"School Program: {thisStudent.StudentSchoolProgram}\n" + $"Course: {thisStudent.StudentSchoolCourse}\n" + $"Year Level: {thisStudent.StudentYearLevel}\n";
+            string data = $"Student ID: {thisStudent.UserStudentID.ToString()}\n" + $"Full Name: {thisStudent.StudentLastName} {thisStudent.StudentFirstName}\n" + $"Email: {thisStudent.StudentEmail}\n" + $"Mobile No: {thisStudent.StudentMobileNumber}\n" + $"City: {thisStudent.StudentCity}\n" + $"Gender: {thisStudent.StudentGender}\n" + $"School Program: {thisStudent.StudentSchoolProgram}\n" + $"Course: {thisStudent.StudentSchoolCourse}\n" + $"Year Level: {thisStudent.StudentYearLevel}\n" + $"Succesful Registration!\n";
             await DisplayAlert("Student Information", data, "OK");
+            if (!File.Exists(fileIDPath))
+            {
+                File.Create(fileIDPath);
+            }
         }
     }
 
@@ -310,6 +320,7 @@ public partial class Register : ContentPage,INotifyPropertyChanged
         }
 
     }
+
 
 
 
