@@ -7,8 +7,8 @@ namespace DirectoryApp
     {
         string setusername = "admin";
         string setpassword = "admin123";
-        string dirPath = "C:\\Users\\cpe3b2a06\\Desktop\\Metroboomin make it boom";
-        string fileName = "metroboomin.txt";
+        string dirPath = "D:\\DirectoryAppFiles";
+        string fileName = "Users.json";
         string filePath = String.Empty;
         public MainPage()
         {

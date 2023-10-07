@@ -3,15 +3,18 @@ using CommunityToolkit.Maui.Views;
 using DirectoryApp.RegisterViewModel;
 using System.Collections.ObjectModel;
 using Microsoft.Maui;
+using System.Text.Json;
 
 namespace DirectoryApp;
 
 public partial class Register : ContentPage,INotifyPropertyChanged
 {
     StudentViewModel thisStudent = new StudentViewModel();
-    string dirPath = "C:\\Users\\cpe3b2a06\\Desktop\\Metroboomin make it boom";
-    string fileName = "metroboomin.txt";
+    string dirPath = "D:\\DirectoryAppFiles";
+    string fileName = String.Empty;
     string fileIDPath = String.Empty;
+    string fileUsers = "Users.json";
+    string fileUserPath = String.Empty;
     public DateTime MaxDate { get; set; } = DateTime.Today;
     public DateTime MinimumDate { get; set; } = DateTime.Today.AddYears(-100);
     private ObservableCollection<string> _studentSchoolProgram;
@@ -132,6 +135,7 @@ public partial class Register : ContentPage,INotifyPropertyChanged
     {
         if(validateBehaviorUserStudentID.IsValid)
         {
+
             if(validateBehaviorStudentFirstName.IsValid)
             {
                 if(validateBehaviorStudentLastName.IsValid)
@@ -200,8 +204,9 @@ public partial class Register : ContentPage,INotifyPropertyChanged
 
     private async void SubmitButtonClicked(object sender, EventArgs e)
     {
-        fileName = "S" + txtUserStudentIdentification.Text;
-        Path.Combine(fileIDPath, fileName);
+        fileUserPath = Path.Combine(dirPath, fileUsers);
+        fileName = txtUserStudentIdentification.Text;
+        fileIDPath = Path.Combine(dirPath, "S" + fileName);
         int valid = ValidateForm();
         if(valid == 1)
         {
@@ -211,11 +216,28 @@ public partial class Register : ContentPage,INotifyPropertyChanged
         else if(valid == 0)
         {
             RegisterStudent();
-            string data = $"Student ID: {thisStudent.UserStudentID.ToString()}\n" + $"Full Name: {thisStudent.StudentLastName} {thisStudent.StudentFirstName}\n" + $"Email: {thisStudent.StudentEmail}\n" + $"Mobile No: {thisStudent.StudentMobileNumber}\n" + $"City: {thisStudent.StudentCity}\n" + $"Gender: {thisStudent.StudentGender}\n" + $"School Program: {thisStudent.StudentSchoolProgram}\n" + $"Course: {thisStudent.StudentSchoolCourse}\n" + $"Year Level: {thisStudent.StudentYearLevel}\n" + $"Succesful Registration!\n";
-            await DisplayAlert("Student Information", data, "OK");
+            string data = $"Student ID: {thisStudent.UserStudentID.ToString()}\n" + $"Full Name: {thisStudent.StudentLastName} {thisStudent.StudentFirstName}\n" + $"Email: {thisStudent.StudentEmail}\n" + $"Mobile No: {thisStudent.StudentMobileNumber}\n" + $"City: {thisStudent.StudentCity}\n" + $"Gender: {thisStudent.StudentGender}\n" + $"School Program: {thisStudent.StudentSchoolProgram}\n" + $"Course: {thisStudent.StudentSchoolCourse}\n" + $"Year Level: {thisStudent.StudentYearLevel}\n";     
+            List<StudentViewModel> students = new List<StudentViewModel>();
             if (!File.Exists(fileIDPath))
             {
+                await DisplayAlert("Student Information", data + $"Succesful Registration!\n", "OK");
+                var jsonReadString = File.ReadAllText(fileUserPath);
+                if (!string.IsNullOrEmpty(jsonReadString))
+                {
+                    students = JsonSerializer.Deserialize<List<StudentViewModel>>(jsonReadString);
+                    students.Add(thisStudent);
+                }
+                else
+                {
+                    students.Add(thisStudent);
+                }
+                var jsonWriteString = JsonSerializer.Serialize<List<StudentViewModel>>(students);
+                File.WriteAllText(fileUserPath, jsonWriteString);
                 File.Create(fileIDPath);
+            }
+            else
+            {
+                await DisplayAlert("Student Information", data, "Student ID already exists.");
             }
         }
     }
