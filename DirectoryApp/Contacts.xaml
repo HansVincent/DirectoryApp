@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="DirectoryApp.Contacts"
+             Title="Contacts">
+    <ScrollView>
+        <VerticalStackLayout HeightRequest="500">
+
+            <Grid Margin="20,20,20,20"
+                      Padding="10"
+                      ColumnDefinitions="*,*"
+                      HorizontalOptions="Center"
+                      VerticalOptions="Center"
+                      RowDefinitions="*,*,*,*,*,*"
+                      ColumnSpacing="15"
+                      RowSpacing="15">
+
+
+                <HorizontalStackLayout Grid.Row="0" Grid.Column="0" Spacing="15">
+                    <Label Text="Gender" FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+
+                    <HorizontalStackLayout Spacing="20">
+                       <RadioButton
+                            x:Name="rdoContactTypeFaculty"
+                            VerticalOptions="Center"
+                            Content="Faculty"> 
+                       </RadioButton>
+                       <RadioButton
+                        x:Name="rdoContactTypeStudent"
+                        VerticalOptions="Center"
+                        Content="Student"/>
+                    </HorizontalStackLayout>  
+                </HorizontalStackLayout>
+
+
+                <HorizontalStackLayout Grid.Row="1" Grid.Column="0" Spacing="15">
+                    <Label Text="Student ID"
+                           FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+                    <Border Stroke="Black">
+                        <Entry x:Name="txtUserStudentIdentification"
+                               WidthRequest="300"
+                               FontSize="15"
+                               Keyboard="Numeric"
+                               MaxLength="5"
+                               Placeholder="">
+                        </Entry>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="2" Grid.Column="0" Spacing="15">
+                    <Label Text="First Name"
+                           FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+                    <Border Stroke="Black">
+                        <Entry x:Name="txtStudentFirstName"
+                               WidthRequest="300"
+                               FontSize="15"
+                               Placeholder="">
+                        </Entry>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="3" Grid.Column="0" Spacing="15">
+                    <Label Text="Last Name"
+            FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+                    <Border Stroke="Black">
+                        <Entry x:Name="txtStudentLastName"
+                           WidthRequest="300"
+                           FontSize="15"
+                           Placeholder="">
+                        </Entry>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="4" Grid.Column="0" Spacing="15">
+                    <Label Text="Email"
+            FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+                    <Border Stroke="Black">
+                        <Entry x:Name="txtStudentEmail"
+                           WidthRequest="300"
+                           FontSize="15"
+                           Placeholder="">
+                        </Entry>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="5" Grid.Column="0" Spacing="15" HorizontalOptions="End">
+                    <Button Text="Submit" Clicked="SubmitButtonClicked" WidthRequest="150" BackgroundColor="Blue" BorderColor="Black" CornerRadius="10" FontAttributes="Bold" FontSize="15" Margin="0,30,0,0">
+                    </Button>
+                </HorizontalStackLayout>
+
+
+                <HorizontalStackLayout Grid.Row="1" Grid.Column="1" Spacing="15">
+                    <Label Text="Mobile No."
+            FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+                    <Border Stroke="Black">
+                        <Entry x:Name="txtStudentMobileNumber"
+                           WidthRequest="300"
+                           FontSize="15"
+                           Placeholder="">
+                        </Entry>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="2" Grid.Column="1" Spacing="15">
+                    <Label Text="School Program"
+            FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+                    <Border x:Name="borderStudentSchoolProgram" Stroke="Black">
+                        <Picker  x:Name="pickerStudentSchoolProgram"
+                             ItemsSource="{Binding StudentSchoolProgram}"
+                             WidthRequest="300"
+                             SelectedIndexChanged="PickerSchoolProgram_SelectedIndexChanged"/>
+                    </Border>
+                </HorizontalStackLayout>
+
+                <HorizontalStackLayout Grid.Row="3" Grid.Column="1" Spacing="15">
+                    <Label Text="Course"
+            FontSize="15" VerticalOptions="Center" WidthRequest="100"/>
+                    <Border x:Name="borderStudentCourse" Stroke="Black">
+                        <Picker x:Name="pickerStudentCourse"
+                            ItemsSource="{Binding StudentSchoolCourse}"    
+                            WidthRequest="300"
+                            SelectedIndexChanged="PickerSchoolCourse_SelectedindexChanged"/>
+                    </Border>
+                </HorizontalStackLayout>
+
+
+                <HorizontalStackLayout Grid.Row="5" Grid.Column="1" Spacing="15" HorizontalOptions="Start">
+                    <Button Text="Reset" Clicked="ResetButtonClicked" WidthRequest="150" BackgroundColor="Gray" BorderColor="Black" CornerRadius="10" FontAttributes="Bold" FontSize="15" Margin="0,30,0,0">
+
+                    </Button>
+                </HorizontalStackLayout>
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

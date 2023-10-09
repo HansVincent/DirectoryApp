@@ -4,10 +4,49 @@
              x:Class="DirectoryApp.Home"
              Title="Home">
     <ScrollView>
-        <Grid ColumnDefinitions="*,*,*,*,*,*,*,*">
-            <HorizontalStackLayout >
-
+        <VerticalStackLayout>
+            <HorizontalStackLayout HorizontalOptions="End">
+                <Button Text="Add Contact" BackgroundColor="Blue" FontAttributes="Bold" TextColor="Black" Clicked="OnNavigateToAddContactTapped"/>
             </HorizontalStackLayout>
-        </Grid>
+            <HorizontalStackLayout HorizontalOptions="StartAndExpand">
+                <CollectionView ItemsSource="{Binding}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical"
+                                 Span="2" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid ColumnDefinitions="250,250,250,250,250,250,250,250">
+
+                                <Border Stroke="Black" Grid.Column="0" WidthRequest="250">
+                                    <Label Text="{Binding StudentID}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="1" WidthRequest="250">
+                                    <Label Text="{Binding LastName}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="2" WidthRequest="250">
+                                    <Label Text="{Binding FirstName}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="3" WidthRequest="250">
+                                    <Label Text="{Binding SchoolProgram}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="4" WidthRequest="250">
+                                    <Label Text="{Binding SchoolCourse}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="5" WidthRequest="250">
+                                    <Label Text="{Binding Email}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="6" WidthRequest="250">
+                                    <Label Text="{Binding MobileNumber}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Border>
+                                <Border Stroke="Black" Grid.Column="7" WidthRequest="250">
+                                    <Label Text="{Binding Type}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
+                                </Border>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate> 
+                </CollectionView>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

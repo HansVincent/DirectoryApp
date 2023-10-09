@@ -4,6 +4,7 @@ using DirectoryApp.RegisterViewModel;
 using System.Collections.ObjectModel;
 using Microsoft.Maui;
 using System.Text.Json;
+using Microsoft.Maui.ApplicationModel.Communication;
 
 namespace DirectoryApp;
 
@@ -206,7 +207,7 @@ public partial class Register : ContentPage,INotifyPropertyChanged
     {
         fileUserPath = Path.Combine(dirPath, fileUsers);
         fileName = txtUserStudentIdentification.Text;
-        fileIDPath = Path.Combine(dirPath, "S" + fileName);
+        fileIDPath = Path.Combine(dirPath, "S" + fileName + ".json");
         int valid = ValidateForm();
         if(valid == 1)
         {
@@ -218,9 +219,9 @@ public partial class Register : ContentPage,INotifyPropertyChanged
             RegisterStudent();
             string data = $"Student ID: {thisStudent.UserStudentID.ToString()}\n" + $"Full Name: {thisStudent.StudentLastName} {thisStudent.StudentFirstName}\n" + $"Email: {thisStudent.StudentEmail}\n" + $"Mobile No: {thisStudent.StudentMobileNumber}\n" + $"City: {thisStudent.StudentCity}\n" + $"Gender: {thisStudent.StudentGender}\n" + $"School Program: {thisStudent.StudentSchoolProgram}\n" + $"Course: {thisStudent.StudentSchoolCourse}\n" + $"Year Level: {thisStudent.StudentYearLevel}\n";     
             List<StudentViewModel> students = new List<StudentViewModel>();
+            List<ContactsViewModel> contact = new List<ContactsViewModel>();
             if (!File.Exists(fileIDPath))
             {
-                await DisplayAlert("Student Information", data + $"Succesful Registration!\n", "OK");
                 var jsonReadString = File.ReadAllText(fileUserPath);
                 if (!string.IsNullOrEmpty(jsonReadString))
                 {
@@ -234,10 +235,15 @@ public partial class Register : ContentPage,INotifyPropertyChanged
                 var jsonWriteString = JsonSerializer.Serialize<List<StudentViewModel>>(students);
                 File.WriteAllText(fileUserPath, jsonWriteString);
                 File.Create(fileIDPath);
+                await DisplayAlert("Student Information", data + $"Succesful Registration!\n", "OK");
+                string path = Path.Combine(dirPath, "S" + txtUserStudentIdentification.Text + ".json");
+                jsonReadString = File.ReadAllText(path);
+                contact = JsonSerializer.Deserialize<List<ContactsViewModel>>(jsonReadString);
+                await Navigation.PushAsync(new Home((txtUserStudentIdentification.Text), contact));
             }
             else
             {
-                await DisplayAlert("Student Information", data, "Student ID already exists.");
+                await DisplayAlert("Student Information", data, "Student ID already exists.");  
             }
         }
     }
@@ -262,7 +268,7 @@ public partial class Register : ContentPage,INotifyPropertyChanged
             thisStudent.StudentGender = "Female";
         }
         thisStudent.StudentBirthdate = studentBirthDate.Date.ToString();
-        thisStudent.StudentMobileNumber = txtStudentMobileNumber.ToString();
+        thisStudent.StudentMobileNumber = txtStudentMobileNumber.Text;
         thisStudent.StudentCity = txtStudentCity.Text;
     }
 

@@ -1,9 +1,25 @@
+using DirectoryApp.RegisterViewModel;
+using System.Collections.ObjectModel;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Json;
+
 namespace DirectoryApp;
 
-public partial class Home : ContentPage
+public partial class Home : ContentPage 
 {
-	public Home()
-	{
-		InitializeComponent();
-	}
+    string userID = String.Empty;
+    public Home( string ID, List<ContactsViewModel> students)
+    {
+        InitializeComponent();
+        userID = ID;
+        BindingContext = students;
+    }
+
+
+
+    private async void OnNavigateToAddContactTapped(object sender, EventArgs e)
+    {
+
+        await Navigation.PushAsync(new Contacts(userID));
+    }
 }

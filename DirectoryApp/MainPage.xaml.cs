@@ -1,5 +1,6 @@
-﻿
+﻿using DirectoryApp.RegisterViewModel;
 using System.IO.Enumeration;
+using System.Text.Json;
 
 namespace DirectoryApp
 {
@@ -21,53 +22,49 @@ namespace DirectoryApp
             Shell.Current.Title = "Window Title";
         }
 
-        private void onLoginClick(object sender, EventArgs e)
+        private async void onLoginClick(object sender, EventArgs e)
         {
             string enteredStudentID = studentID.Text;
             string enteredPassword = password.Text;
+            List<StudentViewModel> students = new List<StudentViewModel>();
+            List<ContactsViewModel> contacts = new List<ContactsViewModel>();
+            ContactsViewModel contact = new ContactsViewModel();
+            string fileIDPath = Path.Combine(dirPath, "Users.json");
+        
+            if (File.Exists(fileIDPath))
+            {
+                var jsonReadString = File.ReadAllText(fileIDPath);
+                if (!string.IsNullOrEmpty(jsonReadString))
+                {
+                    students = JsonSerializer.Deserialize<List<StudentViewModel>>(jsonReadString);
+                    foreach (var data in students)
+                    {
+                        if (data.UserStudentID == Int32.Parse(enteredStudentID))
+                        {
+                            if (data.StudentPassword == enteredPassword)
+                            {
+                                string path = Path.Combine(dirPath, "S" + Convert.ToString(data.UserStudentID) + ".json");
+                                jsonReadString = File.ReadAllText(path);
+                                contacts = JsonSerializer.Deserialize<List<ContactsViewModel>>(jsonReadString);
+                                await Navigation.PushAsync(new Home(enteredStudentID, contacts));
+                            }
+                        }
+                    }
+                    if(studentID.Text == String.Empty)
+                    {
+                        Status.Text = "User ID/Password is empty try again.";
+                    }
+                    else if(password.Text == String.Empty)
+                    {
+                        Status.Text = "User ID/Password is empty try again.";
+                    }
+                    else
+                    {
+                        Status.Text = "User ID/Password is incorrect try again.";
+                    }
 
-            if (enteredStudentID == setusername)
-            {
-                if(enteredPassword == setpassword && !string.IsNullOrWhiteSpace(enteredPassword))
-                {
-                    Status.Text = "Login Successful";
-                }
-                else if(enteredPassword != setpassword && !string.IsNullOrWhiteSpace(enteredPassword))
-                {
-                    Status.Text = "Username and/or Password is incorrect. Please try again";
-                }
-                else if(string.IsNullOrWhiteSpace(enteredPassword))
-                {
-                    Status.Text = "Username and/or Password should not be empty. Please try again.";
                 }
             }
-            else if(enteredStudentID != setusername)
-            {
-                if (enteredPassword != setpassword && !string.IsNullOrWhiteSpace(enteredPassword))
-                {
-                    Status.Text = "User does not exist. Please Register.";
-                }
-                else if (enteredPassword == setpassword && !string.IsNullOrWhiteSpace(enteredPassword))
-                {
-                    Status.Text = "User does not exist. Please Register.";
-                }
-                else if(string.IsNullOrWhiteSpace(enteredPassword))
-                {
-                    Status.Text = "Username and/or Password should not be empty. Please try again.";
-                }
-            }
-            else if(enteredStudentID == String.Empty)
-            {
-                if(enteredPassword == String.Empty)
-                {
-                    Status.Text = "Username and/or Password should not be empty. Please try again.";
-                }
-                if(enteredPassword != String.Empty)
-                {
-                    Status.Text = "Username and/or Password should not be empty. Please try again.";
-                }
-            }
-            SemanticScreenReader.Announce(CounterBtn.Text);
         }
 
         void onEntryTextChanged(object sender, TextChangedEventArgs e)
