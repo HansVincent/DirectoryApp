@@ -10,13 +10,9 @@
             </HorizontalStackLayout>
             <HorizontalStackLayout HorizontalOptions="StartAndExpand">
                 <CollectionView ItemsSource="{Binding}">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical"
-                                 Span="2" />
-                    </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Grid ColumnDefinitions="250,250,250,250,250,250,250,250">
+                            <Grid ColumnDefinitions="*,*,*,*,*,*,*,*">
 
                                 <Border Stroke="Black" Grid.Column="0" WidthRequest="250">
                                     <Label Text="{Binding StudentID}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center"/>
@@ -44,7 +40,7 @@
                                 </Border>
                             </Grid>
                         </DataTemplate>
-                    </CollectionView.ItemTemplate> 
+                    </CollectionView.ItemTemplate>
                 </CollectionView>
             </HorizontalStackLayout>
         </VerticalStackLayout>

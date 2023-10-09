@@ -6,8 +6,6 @@ namespace DirectoryApp
 {
     public partial class MainPage : ContentPage
     {
-        string setusername = "admin";
-        string setpassword = "admin123";
         string dirPath = "D:\\DirectoryAppFiles";
         string fileName = "Users.json";
         string filePath = String.Empty;
@@ -43,7 +41,7 @@ namespace DirectoryApp
                         {
                             if (data.StudentPassword == enteredPassword)
                             {
-                                string path = Path.Combine(dirPath, "S" + Convert.ToString(data.UserStudentID) + ".json");
+                                string path = Path.Combine(dirPath, "S" + enteredStudentID + ".json");
                                 jsonReadString = File.ReadAllText(path);
                                 contacts = JsonSerializer.Deserialize<List<ContactsViewModel>>(jsonReadString);
                                 await Navigation.PushAsync(new Home(enteredStudentID, contacts));

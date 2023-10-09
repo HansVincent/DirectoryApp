@@ -85,6 +85,15 @@ public partial class Contacts : ContentPage, INotifyPropertyChanged
 
     }
 
+    private void rdoCheckedChanged(object sender, CheckedChangedEventArgs args)
+    {
+        if(rdoContactTypeFaculty.IsChecked)
+        {
+            IsFaculty = true;
+            txtUserStudentIdentification.MaxLength = 4;
+        }
+    }
+
     private void PickerSchoolProgram_SelectedIndexChanged(object sender, EventArgs e)
     {
         var picker = (Picker)sender;
@@ -196,14 +205,19 @@ public partial class Contacts : ContentPage, INotifyPropertyChanged
                         {
                             if (pickerStudentSchoolProgram.SelectedIndex != 0)
                             {
-                                if (pickerStudentCourse.SelectedIndex != 0)
-                                {           
-                                   if (rdoContactTypeFaculty.IsChecked || rdoContactTypeStudent.IsChecked)
-                                   {
-                                     return 0;
-                                   }
+                                if ((rdoContactTypeFaculty.IsChecked))
+                                {
+                                    return 0;
 
                                 }
+                                else if((rdoContactTypeStudent.IsChecked))
+                                {
+                                    if ((pickerStudentCourse.SelectedIndex != 0))
+                                    {
+                                        return 0;
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -226,12 +240,13 @@ public partial class Contacts : ContentPage, INotifyPropertyChanged
         studentViewModel.LastName = txtStudentLastName.Text;
         studentViewModel.Email = txtStudentEmail.Text;
         studentViewModel.SchoolProgram = pickerStudentSchoolProgram.SelectedItem.ToString();
-        studentViewModel.SchoolCourse = pickerStudentCourse.SelectedItem.ToString();
+        if(IsFaculty == false)
+        {
+            studentViewModel.SchoolCourse = pickerStudentCourse.SelectedItem.ToString();
+        }
         if (rdoContactTypeFaculty.IsChecked)
         {
             studentViewModel.Type = "Faculty";
-            IsFaculty = true;
-            txtUserStudentIdentification.MaxLength = 4;
         }
         else if (rdoContactTypeStudent.IsChecked)
         {

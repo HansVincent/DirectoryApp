@@ -1,14 +1,13 @@
 using DirectoryApp.RegisterViewModel;
 using System.Collections.ObjectModel;
-using System.Security.Cryptography.X509Certificates;
 using System.Text.Json;
 
 namespace DirectoryApp;
 
-public partial class Home : ContentPage 
+public partial class Home : ContentPage
 {
     string userID = String.Empty;
-    public Home( string ID, List<ContactsViewModel> students)
+    public Home(string ID, List<ContactsViewModel> students)
     {
         InitializeComponent();
         userID = ID;

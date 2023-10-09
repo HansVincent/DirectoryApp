@@ -23,7 +23,8 @@
                        <RadioButton
                             x:Name="rdoContactTypeFaculty"
                             VerticalOptions="Center"
-                            Content="Faculty"> 
+                            Content="Faculty"
+                           CheckedChanged="rdoCheckedChanged"> 
                        </RadioButton>
                        <RadioButton
                         x:Name="rdoContactTypeStudent"
